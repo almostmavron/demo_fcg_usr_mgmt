@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  fcg_usr_mgmt_app:
+    container_name: fcg_usr_mgmt_app
+    image: almostmavron/java_app:1.0.0
+    build: .
+    ports:
+      - 8881:8881
+    environment:
+      - DATABASE_URL=jdbc:postgresql://fcg_usr_mgmt_db:5432/fcg_usr_mgmt
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+    depends_on:
+      - fcg_usr_mgmt_db
+
+  fcg_usr_mgmt_db:
+    container_name: fcg_usr_mgmt_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: fcg_usr_mgmt
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata: {}
