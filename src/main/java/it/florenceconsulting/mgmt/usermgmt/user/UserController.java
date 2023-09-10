@@ -31,13 +31,15 @@ public class UserController {
      * @param id - user's id
      * @param firstname - user's first name
      * @param laststname - user's last name
+     * @param email - user's email
      * @return a list of users, possibly empty
      */
     @GetMapping("/search")
     public List<User> getUsers(
             @RequestParam(required = false) Long id, 
             @RequestParam(required = false) String lastname,
-            @RequestParam(required = false) String firstname ) {
+            @RequestParam(required = false) String firstname,
+            @RequestParam(required = false) String email ) {
         
         ArrayList<User> list = new ArrayList<User>();
         if (id != null) {
@@ -46,9 +48,15 @@ public class UserController {
             } catch (Exception e) {
                 // we just leave the list empty
             }
+        } else if (hasText(email)) {
+            try {
+                return userRepo.findByEmail(email);
+            } catch (Exception e) {
+                 // we just leave the list empty
+            }
         } else if (hasText(lastname) || hasText(firstname)) {
             try {
-                // return userRepo.findByFirstname(firstname);
+                return userRepo.findByNames(lastname, firstname);
             } catch (Exception e) {
                 // we just leave the list empty
             }

@@ -8,10 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
-    // @Query(
-    //     "SELECT * " + 
-    //     "FROM users " + 
-    //     "WHERE (:lastname IS NULL OR lastname = :lastname) " + 
-    //     "  AND (:firstname IS NULL OR firstname = :firstname)")    
-    // public List<User> findByNames(@Param("lastname") String lastname, @Param("firstname") String firstname);
+    @Query("FROM User WHERE (:lastname IS NULL OR lastname = :lastname) AND (:firstname IS NULL OR firstname = :firstname)")    
+    public List<User> findByNames(@Param("lastname") String lastname, @Param("firstname") String firstname);
+
+    public List<User> findByEmail(@Param("email") String email);
 }
