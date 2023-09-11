@@ -41,7 +41,8 @@ public class UserController {
             @RequestParam(required = false) String firstname,
             @RequestParam(required = false) String email ) {
         
-        ArrayList<User> list = new ArrayList<User>();
+        List<User> list = new ArrayList<User>();
+
         if (id != null) {
             try {
                 list.add(getUserById(id));                
@@ -50,13 +51,13 @@ public class UserController {
             }
         } else if (hasText(email)) {
             try {
-                return userRepo.findByEmail(email);
+                list = userRepo.findByEmail(email);
             } catch (Exception e) {
                  // we just leave the list empty
             }
         } else if (hasText(lastname) || hasText(firstname)) {
             try {
-                return userRepo.findByNames(lastname, firstname);
+                list = userRepo.findByNames(lastname, firstname);
             } catch (Exception e) {
                 // we just leave the list empty
             }
@@ -104,7 +105,7 @@ public class UserController {
             userRepo.findById(id).get();
             userRepo.deleteById(id);
             return "User deleted successfully";
-        } catch (Exception e) {
+        } catch (java.util.NoSuchElementException e) {
             return "User not found";
         }
     }
