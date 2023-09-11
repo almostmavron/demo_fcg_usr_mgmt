@@ -10,15 +10,20 @@
 - Gestione del progetto con Git
 - Esporre una API che prenda in input un file csv contenente le informazioni sugli User sopra descritti e li memorizzi nel DB
 
-## REGOLE
+**REGOLE**
 
 - Il progetto può essere consegnato anche se non completo.
 - Il progetto va consegnato entro una settimana dalla richiesta.
 - Il lavoro finito sarà poi discusso in un colloquio dedicato.
 
+## Prerequisites
+- JDK 17 (JAVA_HOME and PATH env variables set accordingly)
+- Maven
+- Docker
+
 ## Build & Run
 - `mvn package`
-- `docker compose up fcg_usr_mgmt_app `
+- `docker compose up fcg_usr_mgmt_app`
 
 ## Usage
 Tip: you can find a Postman collection to start with under `src/test/resources`.
@@ -32,4 +37,4 @@ with at least one of the following query parameters:
 - firstname
 - lastname
 
-Example: `http://localhost:8881/api/users/search?lastname=Capatonda`
+Example: `http://localhost:8881/api/users/search?lastname=Lametta`
