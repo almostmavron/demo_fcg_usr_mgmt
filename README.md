@@ -26,9 +26,11 @@
 - `docker compose up fcg_usr_mgmt_app`
 
 ## Usage
+CRUD REST operations are supported, just point your favourite tool to: `http://localhost:8881/api/users`
+
 Tip: you can find a Postman collection to start with under `src/test/resources`.
-Point your favourite tool to: `http://localhost:8881/api/users`
-CRUD REST operations are supported.
+
+**Search**
 
 To perform a search use  `http://localhost:8881/api/users/search`
 with at least one of the following query parameters:
@@ -38,3 +40,10 @@ with at least one of the following query parameters:
 - lastname
 
 Example: `http://localhost:8881/api/users/search?lastname=Lametta`
+
+**Upload CSV**
+
+There is a CSV example file in the same folder.
+You can use the UploadCSV request in the Postman collection; in any case you just need to POST the file to `http://localhost:8881/api/users/upload-csv`
+with a multipart/form-data content-type and a form parameter of type `file` and name `file`
+
