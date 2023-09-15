@@ -1,12 +1,22 @@
 package it.florenceconsulting.mgmt.usermgmt.user;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Logger;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,5 +118,46 @@ public class UserController {
         } catch (java.util.NoSuchElementException e) {
             return "User not found";
         }
+    }
+
+    @PostMapping("/upload-csv")
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public String upLoadCSV(@RequestParam("file") MultipartFile file) throws IOException {
+        try {
+            
+            CSVFormat cvsFormat = CSVFormat.DEFAULT.withHeader("firstname", "lastname", "email", "address")
+            .withIgnoreEmptyLines().withTrim().withIgnoreSurroundingSpaces();
+            
+            // using parse instead of constructor in order to read one record at the time in memory
+            // TODO check if this is enough, because MultipartFile stream is already buffered 
+            // (eg because of http "chunked") or if we need to wrap the InputStream  in a BufferedReader
+            CSVParser parser = CSVParser.parse(file.getInputStream(), Charset.defaultCharset(), cvsFormat);
+            
+            for (CSVRecord csvRecord : parser.getRecords()) {
+                User user = new User();
+                user.setFirstname(csvRecord.get("firstname"));
+                user.setLastname(csvRecord.get("lastname"));
+                user.setEmail(csvRecord.get("email"));
+                user.setAddress(csvRecord.get("address"));
+                
+                System.out.println("Loading user: " + user);
+
+                userRepo.saveAndFlush(user);
+                /*  TODO use a RestTemplate to create a user via http call, asynchronously,
+                    in order to process a certain number of csv rows in parallel.
+                    @see MvcUriComponentsBuilder (for the service url)
+                    @see @Async, RestTemplate.postForLocation
+                    @see taskExecutor method (for the thread pool)
+                    @see CompletableFuture in order to join them and know when you're done
+                    Push futures in a queue and start joining them as soon as you reached a predetermind threshold                    
+                */
+            }           
+            
+            // userRepo.flush();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+
+        return "File acquired (" + file.getOriginalFilename() + ")";
     }
 }

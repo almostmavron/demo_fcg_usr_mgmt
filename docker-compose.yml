@@ -3,7 +3,7 @@ version: '3.9'
 services:
   fcg_usr_mgmt_app:
     container_name: fcg_usr_mgmt_app
-    image: almostmavron/java_app:1.0.0
+    image: almostmavron/fcg_usr_mgmt_app:1.0.1
     build: .
     ports:
       - 8881:8881

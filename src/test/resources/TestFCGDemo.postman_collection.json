@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "aa521094-a214-4a7c-88b8-b4b55438a0d7",
+		"name": "TestFCGDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Boris\",\r\n    \"lastname\": \"Lametta\",\r\n    \"email\": \"boris.lametta@example.com\",\r\n    \"address\": \"via gillette 12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8881/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create #2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Jack\",\r\n    \"lastname\": \"Maraschino\",\r\n    \"email\": \"jack.maraschino@example.com\",\r\n    \"address\": \"via dello spirito 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8881/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create #3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Preston\",\r\n    \"lastname\": \"Preston\",\r\n    \"email\": \"preston.preston@example.com\",\r\n    \"address\": \"Preston street 3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8881/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/53",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"53"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Marcio\",\r\n    \"lastname\": \"Copotandem\",\r\n    \"email\": \"maccio.capatonda@gmail.com\",\r\n    \"address\": \"roundhead street 47\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8881/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByNone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByEmail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?email=boris.lametta@example.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "boris.lametta@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByLastName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?lastname=Lametta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "lastname",
+							"value": "Lametta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByFistName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?firstname=Boris",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Boris"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByNames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?firstname=Boris&lastname=Lametta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Boris"
+						},
+						{
+							"key": "lastname",
+							"value": "Lametta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchByNamesNoResult",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8881/api/users/search?firstname=Jack&lastname=Lametta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Jack"
+						},
+						{
+							"key": "lastname",
+							"value": "Lametta"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadCSV",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Carmelo Iannello/Downloads/tmp/fcg_202309151048_users.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8881/api/users/upload-csv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"api",
+						"users",
+						"upload-csv"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
